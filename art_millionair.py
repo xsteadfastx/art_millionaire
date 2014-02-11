@@ -2,7 +2,7 @@ import random
 import glob
 import sys
 import os.path
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, redirect
 from flask_bootstrap import Bootstrap
 
 
@@ -36,14 +36,13 @@ def question_number(question_number):
     random.shuffle(answers)
     session['answers'] = answers
 
-    image_file = '%s/%s.jpg' % (directory, question_number)
-    if os.path.isfile(image_file):
-        image = True
+    session['image_file'] = '%s/%s.jpg' % (directory, question_number)
+    if os.path.isfile(session['image_file']):
+        session['image'] = True
     else:
-        image = False
+        session['image'] = False
 
-    return render_template('question.html', question_number=question_number, 
-                           image=image, image_file=image_file)
+    return render_template('question.html', question_number=question_number) 
 
 
 @app.route('/<int:question_number>/result/<guess>')
@@ -52,6 +51,19 @@ def result(question_number, guess):
                            guess=guess)
 
 
+@app.route('/<int:question_number>/joker/<phone_or_audience>')
+def joker_phone_audience(question_number, phone_or_audience):
+    if phone_or_audience == 'phone':
+        session['phone'] = True
+    elif phone_or_audience == 'audience':
+        session['audience'] = True
+    else:
+        pass
+
+    url = '/%s/question' % (question_number)
+    return redirect(url) 
+
+
 if __name__ == "__main__":
     app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-    app.run()
+    app.run(debug=True)

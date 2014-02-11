@@ -4,7 +4,7 @@
 <div class="jumbotron">
 	<div class="container">
 		{% if guess == session.right_answer and question_number == 5 %}
-			<h1>DU HAST ALLE {{ question_number + 1 }} FRAGEN BEANTWORT!!!</h1>
+			<h1>DU HAST ALLE {{ question_number + 1 }} FRAGEN BEANTWORTET!!!</h1>
 			<p>Mehr geht nicht...</p>
 		{% elif guess == session.right_answer %}
 			<h1>RICHTIG!</h1>
