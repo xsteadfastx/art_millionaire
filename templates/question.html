@@ -11,27 +11,31 @@
 	{% endif %}
 	<div class="btn-group btn-group-justified">
 		<div class="btn-group">
-			<button type="button" class="btn btn-default">50/50</button>
+			{% if '5050' in session %}
+			<button type="button" class="btn btn-default"><strike>50/50</strike></button>
+			{% else %}
+			<a href="/{{ question_number }}/joker/5050"><button type="button" class="btn btn-default">50/50</button></a>
+			{% endif %}
 		</div>
 		<div class="btn-group">
 			{% if session.audience == True %}
 			<button type="button" class="btn btn-default"><strike>Publikum</strike></button>
 			{% else %}
-			<a href="joker/audience"><button type="button" class="btn btn-default">Publikum</button></a>
+			<a href="/{{ question_number }}/joker/audience"><button type="button" class="btn btn-default">Publikum</button></a>
 			{% endif %}
 		</div>
 		<div class="btn-group">
 			{% if session.phone == True %}
 			<button type="button" class="btn btn-default"><strike>Anrufen</strike></button>
 			{% else %}
-			<a href="joker/phone"><button type="button" class="btn btn-default">Anrufen</button></a>
+			<a href="/{{ question_number }}/joker/phone"><button type="button" class="btn btn-default">Anrufen</button></a>
 			{% endif %}
 		</div>
 	</div>
 	<br />
 	<div class="list-group">
 	{% for answer in session.answers %}
-		<a class="list-group-item list-group-item-info" href="result/{{ answer }}">{% print answer %}</a>
+		<a class="list-group-item list-group-item-info" href="/{{ question_number }}/result/{{ answer }}">{% print answer %}</a>
 	{% endfor %}
 	</div>
 </div>
