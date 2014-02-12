@@ -72,8 +72,7 @@ def joker_phone_audience(question_number, phone_or_audience):
     else:
         pass
 
-    url = '/%s/question' % (question_number)
-    return redirect(url)
+    return render_template('question.html', question_number=question_number)
 
 
 @app.route('/<int:question_number>/joker/5050')
