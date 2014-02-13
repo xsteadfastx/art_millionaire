@@ -6,6 +6,7 @@
 		{% if guess == session.right_answer and question_number == 5 %}
 			<h1>DU HAST ALLE {{ question_number + 1 }} FRAGEN BEANTWORTET!!!</h1>
 			<p>Mehr geht nicht...</p>
+			<p><a class="btn btn-primary btn-lg" role="button" href="/">Auf Anfang...</a></p>
 		{% elif guess == session.right_answer %}
 			<h1>RICHTIG!</h1>
 			<p>Super gemacht! Du hast <strong>{{ question_number + 1 }}</strong> Fragen richtig beantwortet.</p>
@@ -13,6 +14,7 @@
 		{% else %}
 			<h1>FALSCH!</h1>
 			<p>Du hast Frage {{ question_number + 1 }} nicht richtig beantwortet. Die richtige Antwort wäre <strong>"{{ session.right_answer }}"</strong> gewesen. Schade!</p>
+			<p><a class="btn btn-primary btn-lg" role="button" href="/">Auf Anfang...</a></p>
 		{% endif %}
 	</div>
 </div>

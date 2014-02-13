@@ -50,6 +50,7 @@ def images(filename):
 
 @app.route('/')
 def index():
+    session.clear()
     folders = os.listdir('questions')
 
     return render_template('index.html', folders=folders)
@@ -57,7 +58,6 @@ def index():
 
 @app.route('/<folder>')
 def folder(folder):
-    session.clear()
     session['folder'] = folder
     session['question_extract'] = get_questions()
 
