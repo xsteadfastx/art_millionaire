@@ -18,7 +18,7 @@ This is a webapp for playing a 'who wants to be a millionair'-like game with cus
 2. put in text files from 0.txt to 5.txt.
 3. if you want to display a image for the question: put a jpg with the number of the question in the directory. for example 0.jpg.
 
-## Question-File-Format ##
+### Fileformat ###
 its just a text file
 - first line: question
 - second line: right answer
