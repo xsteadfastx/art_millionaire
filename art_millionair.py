@@ -80,16 +80,19 @@ def result(folder, question_number, guess):
                            guess=guess)
 
 
-@app.route('/<folder>/<int:question_number>/joker/<phone_or_audience>')
-def joker_phone_audience(folder, question_number, phone_or_audience):
-    if phone_or_audience == 'phone':
-        session['phone'] = True
-    elif phone_or_audience == 'audience':
-        session['audience'] = True
-    else:
-        pass
+@app.route('/<folder>/<int:question_number>/joker/audience')
+def joker_audience(folder, question_number):
+    session['audience'] = True
 
     return render_template('question.html', folder=folder,
+                           question_number=question_number)
+
+
+@app.route('/<folder>/<int:question_number>/joker/phone')
+def joker_phone(folder, question_number):
+    session['phone'] = True
+
+    return render_template('phone.html', folder=folder,
                            question_number=question_number)
 
 
