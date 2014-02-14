@@ -3,7 +3,7 @@ art_millionair
 
 This is a webapp for playing a 'who wants to be a millionair'-like game with custom questions. 
 
-  ![Screenshot](screenshot.png)
+![Screenshot](screenshot.png)
 
 ## Installation ##
 1. `virtualenv -p /usr/bin/python3 art_millionair`
@@ -27,3 +27,9 @@ its just a text file
 ## Running ##
 1. `python art_millionair.py`
 2. point your browser to http://localhost:5000
+
+## Powered by ##
+- [flask](http://flask.pocoo.org/)
+- [flask_bootstrap](https://github.com/mbr/flask-bootstrap)
+- [TimeCircles](https://github.com/wimbarelds/TimeCircles)
+- Cola Light
