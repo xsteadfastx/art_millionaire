@@ -13,8 +13,10 @@ Bootstrap(app)
 
 
 def get_questions():
+    question_files = glob.glob('questions/'+session['folder']+'/*.txt')
+    session['question_len'] = len(question_files)
     questions = []
-    for i in sorted(glob.glob('questions/'+session['folder']+'/*.txt')):
+    for i in sorted(question_files):
         questions.append(open(i, 'r').read().splitlines())
 
     return questions

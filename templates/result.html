@@ -4,7 +4,7 @@
 {% block content %}
 <div class="jumbotron">
 	<div class="container">
-		{% if guess == session.right_answer and question_number == 5 %}
+		{% if guess == session.right_answer and question_number + 1 == session.question_len %}
 			<h1>DU HAST GEWONNEN!</h1>
 			<p>Herzlichen Gl&uuml;ckwunsch!</p>
 			<p><a class="btn btn-primary btn-lg" role="button" href="/">Auf Anfang...</a></p>
