@@ -7,6 +7,7 @@ from flask_bootstrap import Bootstrap
 
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
 app.config['BOOTSTRAP_SERVE_LOCAL'] = True
 Bootstrap(app)
 
@@ -57,7 +58,7 @@ def index():
     return render_template('index.html', folders=folders)
 
 
-@app.route('/<folder>')
+@app.route('/art_millionair/<folder>')
 def folder(folder):
     session['folder'] = folder
     session['question_extract'] = get_questions()
@@ -65,7 +66,7 @@ def folder(folder):
     return render_template('folder.html')
 
 
-@app.route('/<folder>/<int:question_number>/question')
+@app.route('/art_millionair/<folder>/<int:question_number>/question')
 def question_number(folder, question_number):
     session['answers'] = create_answer_list(question_number)
 
@@ -73,14 +74,14 @@ def question_number(folder, question_number):
                            question_number=question_number)
 
 
-@app.route('/<folder>/<int:question_number>/result/<guess>')
+@app.route('/art_millionair/<folder>/<int:question_number>/result/<guess>')
 def result(folder, question_number, guess):
     return render_template('result.html', folder=folder,
                            question_number=question_number,
                            guess=guess)
 
 
-@app.route('/<folder>/<int:question_number>/joker/audience')
+@app.route('/art_millionair/<folder>/<int:question_number>/joker/audience')
 def joker_audience(folder, question_number):
     session['audience'] = True
 
@@ -88,7 +89,7 @@ def joker_audience(folder, question_number):
                            question_number=question_number)
 
 
-@app.route('/<folder>/<int:question_number>/joker/phone')
+@app.route('/art_millionair/<folder>/<int:question_number>/joker/phone')
 def joker_phone(folder, question_number):
     session['phone'] = True
 
@@ -96,7 +97,7 @@ def joker_phone(folder, question_number):
                            question_number=question_number)
 
 
-@app.route('/<folder>/<int:question_number>/joker/5050')
+@app.route('/art_millionair/<folder>/<int:question_number>/joker/5050')
 def joker_5050(folder, question_number):
     session['5050'] = question_number
     session['answers'] = create_answer_list(question_number)
@@ -106,5 +107,4 @@ def joker_5050(folder, question_number):
 
 
 if __name__ == "__main__":
-    app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
     app.run(debug=True)
