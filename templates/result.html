@@ -14,7 +14,7 @@
 			<p><a class="btn btn-primary btn-lg" role="button" href="/">Auf Anfang...</a></p>
 		{% elif guess == session.right_answer %}
 			<h1>RICHTIG!</h1>
-			<p>Super gemacht! Die richtige Antwort war <strong>{{ session.right_answer }}</strong>.</p>
+			<p>Super gemacht! Die richtige Antwort war <strong>"{{ session.right_answer }}"</strong>.</p>
 			{% if session.image_answer %}
 				<p><img src="/images/{{ question_number }}-a.jpg"></p>
 			{% endif %}
