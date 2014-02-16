@@ -67,7 +67,7 @@ def index():
     return render_template('index.html', folders=folders)
 
 
-@app.route('/art_millionair/<folder>')
+@app.route('/art_millionaire/<folder>')
 def folder(folder):
     session['folder'] = folder
     session['question_extract'] = get_questions()
@@ -75,7 +75,7 @@ def folder(folder):
     return render_template('folder.html')
 
 
-@app.route('/art_millionair/<folder>/<int:question_number>/question')
+@app.route('/art_millionaire/<folder>/<int:question_number>/question')
 def question_number(folder, question_number):
     session['answers'] = create_answer_list(question_number)
 
@@ -83,14 +83,14 @@ def question_number(folder, question_number):
                            question_number=question_number)
 
 
-@app.route('/art_millionair/<folder>/<int:question_number>/result/<guess>')
+@app.route('/art_millionaire/<folder>/<int:question_number>/result/<guess>')
 def result(folder, question_number, guess):
     return render_template('result.html', folder=folder,
                            question_number=question_number,
                            guess=guess)
 
 
-@app.route('/art_millionair/<folder>/<int:question_number>/joker/audience')
+@app.route('/art_millionaire/<folder>/<int:question_number>/joker/audience')
 def joker_audience(folder, question_number):
     session['audience'] = True
 
@@ -98,7 +98,7 @@ def joker_audience(folder, question_number):
                            question_number=question_number)
 
 
-@app.route('/art_millionair/<folder>/<int:question_number>/joker/phone')
+@app.route('/art_millionaire/<folder>/<int:question_number>/joker/phone')
 def joker_phone(folder, question_number):
     session['phone'] = True
 
@@ -106,7 +106,7 @@ def joker_phone(folder, question_number):
                            question_number=question_number)
 
 
-@app.route('/art_millionair/<folder>/<int:question_number>/joker/5050')
+@app.route('/art_millionaire/<folder>/<int:question_number>/joker/5050')
 def joker_5050(folder, question_number):
     session['5050'] = question_number
     session['answers'] = create_answer_list(question_number)
