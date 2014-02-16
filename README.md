@@ -16,7 +16,11 @@ This is a webapp for playing a 'who wants to be a millionair'-like game with cus
 ## Questions ##
 1. create a folder in the questions-directory
 2. put in text files from 0.txt to 5.txt.
-3. if you want to display a image for the question: put a jpg with the number of the question in the directory. for example 0.jpg.
+
+### Images ###
+if you want to add a question or a answer image or both: just drop a jpg-file in the folder. for example:
+- for a image displayed on the question-page: **0-q.jpg**
+- for a image displayed on the answer-page: **0-a.jpg**
 
 ### Fileformat ###
 its just a text file

@@ -7,14 +7,24 @@
 		{% if guess == session.right_answer and question_number + 1 == session.question_len %}
 			<h1>DU HAST GEWONNEN!</h1>
 			<p>Herzlichen Gl&uuml;ckwunsch!</p>
+			<p>Die letzte richtige Antwort war <strong>"{{ session.right_answer }}"</strong></p>
+			{% if session.image_answer %}
+				<p><img src="/images/{{ question_number }}-a.jpg"></p>
+			{% endif %}
 			<p><a class="btn btn-primary btn-lg" role="button" href="/">Auf Anfang...</a></p>
 		{% elif guess == session.right_answer %}
 			<h1>RICHTIG!</h1>
-			<p>Super gemacht! Du hast Frage <strong>{{ question_number + 1 }}</strong>. richtig beantwortet.</p>
-			<p><a class="btn btn-primary btn-lg" role="button" href="../../{{ question_number +1 }}/question">Auf zur n&auml;chsten Frage...</a></p>
+			<p>Super gemacht! Die richtige Antwort war <strong>{{ session.right_answer }}</strong>.</p>
+			{% if session.image_answer %}
+				<p><img src="/images/{{ question_number }}-a.jpg"></p>
+			{% endif %}
+			<p><a class="btn btn-primary btn-lg" role="button" href="../../{{ question_number +1 }}/question">Auf zu Frage {{ question_number + 2 }}...</a></p>
 		{% else %}
 			<h1>Leider verloren!</h1>
 			<p>Du hast Frage <strong>{{ question_number + 1 }}</strong>. nicht richtig beantwortet. Die richtige Antwort wäre <strong>"{{ session.right_answer }}"</strong> gewesen. Schade!</p>
+			{% if session.image_answer %}
+				<p><img src="/images/{{ question_number }}-a.jpg"></p>
+			{% endif %}
 			<p><a class="btn btn-primary btn-lg" role="button" href="/">Auf Anfang...</a></p>
 		{% endif %}
 	</div>

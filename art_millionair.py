@@ -36,12 +36,19 @@ def create_answer_list(question_number):
 
     random.shuffle(answers)
 
-    image_file = '%s/%s/%s.jpg' % ('questions', session['folder'],
-                                   question_number)
-    if os.path.isfile(image_file):
-        session['image'] = True
+    image_question = '%s/%s/%s-q.jpg' % ('questions', session['folder'],
+                                         question_number)
+    if os.path.isfile(image_question):
+        session['image_question'] = True
     else:
-        session['image'] = False
+        session['image_question'] = False
+
+    image_answer = '%s/%s/%s-a.jpg' % ('questions', session['folder'],
+                                       question_number)
+    if os.path.isfile(image_answer):
+        session['image_answer'] = True
+    else:
+        session['image_answer'] = False
 
     return answers
 
