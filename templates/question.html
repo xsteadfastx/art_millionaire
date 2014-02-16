@@ -55,7 +55,7 @@
 				<h1 class="modal-title" id="myModalLabel">{{ session.question }}</h1>
 			</div>
 			<div class="modal-body">
-				<div class="countdown" data-timer="30" style="width: 500px;"></div>
+				<div class="countdown" data-timer="30" style="width: 300px;"></div>
 				{% for answer in session.answers %}
 					<h3>{% print answer %}</h3>
 				{% endfor %}
@@ -73,6 +73,8 @@
     <script type="text/javascript" src="/static/js/TimeCircles.js"></script>
     <script type="text/javascript">
 	$(".countdown").TimeCircles({
+			"bg_width": 0.1,
+			"fg_width": 0.13333333333333333,
 			count_past_zero: false,
 			"time": {
 				"Days": {
