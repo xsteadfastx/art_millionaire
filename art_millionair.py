@@ -95,7 +95,7 @@ def joker_audience(folder, question_number):
 def joker_phone(folder, question_number):
     session['phone'] = True
 
-    return render_template('phone.html', folder=folder,
+    return render_template('question.html', folder=folder,
                            question_number=question_number)
 
 

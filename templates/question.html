@@ -1,8 +1,12 @@
 {% extends "bootstrap/base.html" %}
 
 {% block title %}art_millionair{% endblock %}
+{% block styles -%}
+    {{super()}}
+    <link href="/static/css/TimeCircles.css" rel="stylesheet">
+{% endblock styles %}
 {% block content %}
-<div class="container">
+<div class="container text-center">
 	<h1>{{ session.question }}</h1>
 	{% if session.image %}
 		<img src="/images/{{ question_number }}.jpg">
@@ -29,7 +33,7 @@
 			{% if session.phone == True %}
 			<button type="button" class="btn btn-default"><strike>Anrufen</strike></button>
 			{% else %}
-			<a href="/art_millionair/{{ session.folder }}/{{ question_number }}/joker/phone"><button type="button" class="btn btn-default">Anrufen</button></a>
+			<a data-toggle="modal" href="#PhoneJoker"><button type="button" class="btn btn-default">Anrufen</button></a>
 			{% endif %}
 		</div>
 	</div>
@@ -40,4 +44,51 @@
 	{% endfor %}
 	</div>
 </div>
+
+{% if session.phone != True %}
+<!-- AnrufModal -->
+<div class="modal fade" id="PhoneJoker" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h1 class="modal-title" id="myModalLabel">{{ session.question }}</h1>
+			</div>
+			<div class="modal-body">
+				<div class="countdown" data-timer="30" style="width: 500px;"></div>
+				{% for answer in session.answers %}
+					<h3>{% print answer %}</h3>
+				{% endfor %}
+			</div>
+			<div class="modal-footer">
+				<a href="/art_millionair/{{ session.folder }}/{{ question_number }}/joker/phone"><button type="button" class="btn btn-primary">Close</button></a>
+			</div>
+		</div>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+    {{super()}}
+    <script type="text/javascript" src="/static/js/TimeCircles.js"></script>
+    <script type="text/javascript">
+	$(".countdown").TimeCircles({
+			count_past_zero: false,
+			"time": {
+				"Days": {
+					"show": false
+				},
+				"Hours": {
+					"show": false
+				},
+				"Minutes": {
+					"show": false
+				},
+				"Seconds": {
+					"text": "Sekunden",
+					"color": "#99CCFF"
+				}
+			}
+	});
+    </script>
 {% endblock %}
