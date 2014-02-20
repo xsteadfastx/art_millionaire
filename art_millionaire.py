@@ -131,7 +131,7 @@ def write_question(directory, question_number, content):
 
 
 class CreateForm(Form):
-    titel = TextField('Titel', validators=[Required()])    
+    titel = TextField('Titel', validators=[Required()])
 
 
 @app.route('/create', methods=('GET', 'POST'))
@@ -171,7 +171,7 @@ def create_question(titel, question_number):
         question_content.append(form.fake_answer_3.data)
 
         write_question('questions/'+titel, question_number, question_content)
-        
+
         url = '/create/%s/%s/upload_images' % (titel, question_number)
         return redirect(url)
 
