@@ -1,0 +1,16 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}art_millionaire{% endblock %}
+{% block content %}
+<div class="jumbotron">
+	<div class="container">
+		<h1>Neue Runde anlegen</h1>
+			<form class="form" role="form" method="POST">
+				{{ form.hidden_tag() }}
+				{{ wtf.form_field(form.titel) }}
+				<p><button type="submit" class="btn btn-default">Anlegen</button></p>
+			</form>
+	</div>
+</div>
+{% endblock %}

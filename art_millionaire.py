@@ -4,6 +4,10 @@ import os
 import os.path
 from flask import Flask, render_template, session, redirect, send_from_directory
 from flask_bootstrap import Bootstrap
+from flask_wtf import Form
+from wtforms import TextField, FileField
+from wtforms.validators import Required
+from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
@@ -113,6 +117,100 @@ def joker_5050(folder, question_number):
 
     return render_template('question.html', folder=folder,
                            question_number=question_number)
+
+
+''' CREATOR '''
+
+
+def write_question(directory, question_number, content):
+    question_file = '%s/%s.txt' % (directory, question_number)
+    file = open(question_file, 'w+')
+    for i in content:
+        file.write(i+'\n')
+    file.close()
+
+
+class CreateForm(Form):
+    titel = TextField('Titel', validators=[Required()])    
+
+
+@app.route('/create', methods=('GET', 'POST'))
+def create():
+    form = CreateForm()
+    if form.validate_on_submit():
+        new_folder = form.titel.data
+
+        if os.path.exists('questions/'+new_folder):
+            return render_template('create.html', form=form)
+
+        else:
+            os.makedirs('questions/'+new_folder)
+            url = '/create/%s/0' % new_folder
+            return redirect(url)
+
+    return render_template('create.html', form=form)
+
+
+class CreateQuestionForm(Form):
+    question = TextField('Frage', validators=[Required()])
+    right_answer = TextField('Richtige Antwort', validators=[Required()])
+    fake_answer_1 = TextField('Falsche Antwort', validators=[Required()])
+    fake_answer_2 = TextField('Falsche Antwort', validators=[Required()])
+    fake_answer_3 = TextField('Falsche Antwort', validators=[Required()])
+
+
+@app.route('/create/<titel>/<int:question_number>', methods=('GET', 'POST'))
+def create_question(titel, question_number):
+    form = CreateQuestionForm()
+    if form.validate_on_submit():
+        question_content = []
+        question_content.append(form.question.data)
+        question_content.append(form.right_answer.data)
+        question_content.append(form.fake_answer_1.data)
+        question_content.append(form.fake_answer_2.data)
+        question_content.append(form.fake_answer_3.data)
+
+        write_question('questions/'+titel, question_number, question_content)
+        
+        url = '/create/%s/%s/upload_images' % (titel, question_number)
+        return redirect(url)
+
+    return render_template('create_question.html', titel=titel,
+                           question_number=question_number,
+                           form=form)
+
+
+''' ALL THE UPLOAD FOO '''
+
+
+class UploadImagesForm(Form):
+    question_image = FileField('Bild zur Frage')
+    answer_image = FileField('Bild zur Antwort')
+
+
+@app.route('/create/<titel>/<int:question_number>/upload_images', methods=('GET', 'POST'))
+def upload_images(titel, question_number):
+    form = UploadImagesForm()
+    UPLOAD_FOLDER = 'questions/%s' % titel
+    app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+    if form.validate_on_submit():
+        question_image = secure_filename(form.question_image.data.filename)
+        if question_image:
+            form.question_image.data.save(os.path.join(app.config['UPLOAD_FOLDER'],
+                                                       str(question_number)+'-q.jpg'))
+
+        answer_image = secure_filename(form.answer_image.data.filename)
+        if answer_image:
+            form.answer_image.data.save(os.path.join(app.config['UPLOAD_FOLDER'],
+                                                     str(question_number)+'-a.jpg'))
+
+        url = '/create/%s/%s' % (titel, question_number + 1)
+        return redirect(url)
+
+    return render_template('upload_images.html', titel=titel,
+                           question_number=question_number,
+                           form=form)
 
 
 if __name__ == "__main__":

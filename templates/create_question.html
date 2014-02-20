@@ -1,0 +1,18 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}art_millionaire{% endblock %}
+{% block content %}
+<div class="container">
+	<h1>Neue Frage anlegen</h1>
+		<form class="form" role="form" method="POST">
+			{{ form.hidden_tag() }}
+			{{ wtf.form_field(form.question) }}
+			{{ wtf.form_field(form.right_answer) }}
+			{{ wtf.form_field(form.fake_answer_1) }}
+			{{ wtf.form_field(form.fake_answer_2) }}
+			{{ wtf.form_field(form.fake_answer_3) }}
+			<p class="text-right"><button type="submit" class="btn btn-default">Anlegen</button></p>
+		</form>
+</div>
+{% endblock %}
