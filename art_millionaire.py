@@ -144,7 +144,6 @@ def create():
             return render_template('create.html', form=form)
 
         else:
-            os.makedirs('questions/'+new_folder)
             url = '/create/%s/0' % new_folder
             return redirect(url)
 
@@ -163,6 +162,9 @@ class CreateQuestionForm(Form):
 def create_question(titel, question_number):
     form = CreateQuestionForm()
     if form.validate_on_submit():
+        if question_number == 0:
+            os.makedirs('questions/'+titel)
+
         question_content = []
         question_content.append(form.question.data)
         question_content.append(form.right_answer.data)
