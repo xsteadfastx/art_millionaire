@@ -8,6 +8,7 @@ from flask_wtf import Form
 from wtforms import TextField, FileField
 from wtforms.validators import Required
 from werkzeug.utils import secure_filename
+from PIL import Image
 
 
 app = Flask(__name__)
@@ -182,6 +183,15 @@ def create_question(titel, question_number):
                            form=form)
 
 
+''' RESIZE IMAGES '''
+
+
+def image_resize(filename, size=450):
+    img = Image.open(filename)
+    img.thumbnail((size, size), Image.ANTIALIAS)
+    img.save(filename)
+
+
 ''' ALL THE UPLOAD FOO '''
 
 
@@ -201,11 +211,13 @@ def upload_images(titel, question_number):
         if question_image:
             form.question_image.data.save(os.path.join(app.config['UPLOAD_FOLDER'],
                                                        str(question_number)+'-q.jpg'))
+            image_resize(app.config['UPLOAD_FOLDER']+'/'+str(question_number)+'-q.jpg')
 
         answer_image = secure_filename(form.answer_image.data.filename)
         if answer_image:
             form.answer_image.data.save(os.path.join(app.config['UPLOAD_FOLDER'],
                                                      str(question_number)+'-a.jpg'))
+            image_resize(app.config['UPLOAD_FOLDER']+'/'+str(question_number)+'-a.jpg')
 
         url = '/create/%s/%s' % (titel, question_number + 1)
         return redirect(url)
