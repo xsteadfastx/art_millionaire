@@ -40,7 +40,7 @@
 	<br />
 	<div class="list-group">
 	{% for answer in session.answers %}
-		<a class="list-group-item list-group-item-info" href="/art_millionaire/{{ session.folder }}/{{ question_number }}/result/{{ answer }}">{% print answer %}</a>
+		<a class="list-group-item list-group-item-info" href="/art_millionaire/{{ session.folder }}/{{ question_number }}/result/{{ answer }}"><h4>{% print answer %}</h4></a>
 	{% endfor %}
 	</div>
 </div>
