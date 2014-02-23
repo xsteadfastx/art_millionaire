@@ -58,8 +58,8 @@ def create_answer_list(question_number):
     return answers
 
 
-@app.route('/images/<filename>')
-def images(filename):
+@app.route('/images/<folder>/<filename>')
+def images(folder, filename):
     return send_from_directory(app.root_path + '/questions/' + session['folder'],
                                filename)
 
