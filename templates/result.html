@@ -8,20 +8,35 @@
 			<h1>DU HAST GEWONNEN!</h1>
 			<p>Herzlichen Gl&uuml;ckwunsch!</p>
 			<p>Die letzte richtige Antwort war <strong>"{{ session.right_answer }}"</strong></p>
+			<div class="progress">
+				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ question_number + 1 }}" aria-valuemin="1" aria-valuemax="{{ session.question_len }}" style="width: {{ (100 / session.question_len) * (question_number + 1)  }}%">
+					<span class="sr-only">Frage {{ question_number +1 }} von {{ session.question_len }} richtig beantwortet!</span>
+				</div>
+			</div>
 			{% if session.image_answer %}
 			<p><img src="/images/{{ session.folder }}/{{ question_number }}-a.jpg"></p>
 			{% endif %}
 			<p><a class="btn btn-primary btn-lg" role="button" href="/"><span class="glyphicon glyphicon-home"></span> Auf Anfang...</a></p>
 		{% elif guess == session.right_answer %}
-		<h1>RICHTIG! <span class="glyphicon glyphicon-ok-circle"></span></h1>
+			<h1>RICHTIG!</h1>
 			<p>Super gemacht! Die richtige Antwort war <strong>"{{ session.right_answer }}"</strong>.</p>
+			<div class="progress">
+				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ question_number + 1 }}" aria-valuemin="1" aria-valuemax="{{ session.question_len }}" style="width: {{ (100 / session.question_len) * (question_number + 1)  }}%">
+					<span class="sr-only">Frage {{ question_number +1 }} von {{ session.question_len }} richtig beantwortet!</span>
+				</div>
+			</div>
 			{% if session.image_answer %}
 			<p><img src="/images/{{ session.folder }}/{{ question_number }}-a.jpg"></p>
 			{% endif %}
 			<p><a class="btn btn-primary btn-lg" role="button" href="../../{{ question_number +1 }}/question"><span class="glyphicon glyphicon-circle-arrow-right"></span> Auf zu Frage {{ question_number + 2 }}...</a></p>
 		{% else %}
-			<h1>Leider verloren! <span class="glyphicon glyphicon-remove-circle"></span></h1>
+			<h1>Leider verloren!</h1>
 			<p>Du hast Frage <strong>{{ question_number + 1 }}</strong>. nicht richtig beantwortet. Die richtige Antwort wäre <strong>"{{ session.right_answer }}"</strong> gewesen. Schade!</p>
+			<div class="progress">
+				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ question_number + 1 }}" aria-valuemin="1" aria-valuemax="{{ session.question_len }}" style="width: {{ (100 / session.question_len) * (question_number + 1)  }}%">
+					<span class="sr-only">Frage {{ question_number +1 }} von {{ session.question_len }} falsch beantwortet!</span>
+				</div>
+			</div>
 			{% if session.image_answer %}
 			<p><img src="/images/{{ session.folder }}/{{ question_number }}-a.jpg"></p>
 			{% endif %}
