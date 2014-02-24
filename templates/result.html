@@ -10,7 +10,7 @@
 			<p>Die letzte richtige Antwort war <strong>"{{ session.right_answer }}"</strong></p>
 			<div class="progress">
 				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ question_number + 1 }}" aria-valuemin="1" aria-valuemax="{{ session.question_len }}" style="width: {{ (100 / session.question_len) * (question_number + 1)  }}%">
-					<span class="sr-only">Frage {{ question_number +1 }} von {{ session.question_len }} richtig beantwortet!</span>
+					<strong>{{ question_number +1 }}</strong> von <strong>{{ session.question_len }}</strong>
 				</div>
 			</div>
 			{% if session.image_answer %}
@@ -22,7 +22,7 @@
 			<p>Super gemacht! Die richtige Antwort war <strong>"{{ session.right_answer }}"</strong>.</p>
 			<div class="progress">
 				<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ question_number + 1 }}" aria-valuemin="1" aria-valuemax="{{ session.question_len }}" style="width: {{ (100 / session.question_len) * (question_number + 1)  }}%">
-					<span class="sr-only">Frage {{ question_number +1 }} von {{ session.question_len }} richtig beantwortet!</span>
+					<strong>{{ question_number +1 }}</strong> von <strong>{{ session.question_len }}</strong>
 				</div>
 			</div>
 			{% if session.image_answer %}
@@ -34,7 +34,7 @@
 			<p>Du hast Frage <strong>{{ question_number + 1 }}</strong>. nicht richtig beantwortet. Die richtige Antwort wäre <strong>"{{ session.right_answer }}"</strong> gewesen. Schade!</p>
 			<div class="progress">
 				<div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ question_number + 1 }}" aria-valuemin="1" aria-valuemax="{{ session.question_len }}" style="width: {{ (100 / session.question_len) * (question_number + 1)  }}%">
-					<span class="sr-only">Frage {{ question_number +1 }} von {{ session.question_len }} falsch beantwortet!</span>
+					<strong>{{ question_number +1 }}</strong> von <strong>{{ session.question_len }}</strong>
 				</div>
 			</div>
 			{% if session.image_answer %}
